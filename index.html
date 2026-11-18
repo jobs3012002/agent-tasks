@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ניהול משימות לסוכן ביטוח</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--tx:#f3f8ff;--mu:#9aa9c2;--ac:#5b7fb5;--gl:rgba(255,255,255,.055);--glb:rgba(255,255,255,.16);--soft:rgba(255,255,255,.07);--bd:rgba(255,255,255,.1);--wa:#22b866;--r:22px;
+--hl:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.05);--sh:0 10px 40px rgba(0,0,0,.6);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:#000;overflow-x:hidden;max-width:100%;overscroll-behavior-x:none;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;width:100%;max-width:100vw;overflow-x:hidden;overscroll-behavior-x:none;color:var(--tx);font-family:"Heebo","Segoe UI",Arial,sans-serif;line-height:1.5;
+background:radial-gradient(800px 480px at 88% -8%,rgba(27,51,96,.45),transparent 62%),radial-gradient(700px 520px at 0% 105%,rgba(18,36,72,.4),transparent 62%),#000;background-attachment:fixed}
+.glass,.st,.card,.tabs,.hdi,.md{background:var(--gl);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--bd);box-shadow:var(--hl),var(--sh)}
+.hd{padding:16px 16px 0}
+.hdi{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:26px;padding:14px 18px}
+.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,rgba(94,176,255,.5),rgba(31,75,176,.5));border:1px solid rgba(255,255,255,.3);box-shadow:var(--hl);display:flex;align-items:center;justify-content:center}
+.hd h1{margin:0;font-size:20px;font-weight:700}.hd p{margin:0;font-size:13px;color:var(--mu)}
+.sp{flex:1}
+.wrap{max-width:1200px;margin:16px auto 0;padding:0 16px 40px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.st{border-radius:20px;padding:14px 16px}
+.st b{display:block;font-size:27px;font-weight:800;line-height:1.1}.st span{font-size:13px;color:var(--mu)}
+.st.g b{color:#5eb0ff}.st.r b{color:#ff3b47}
+.tabs{position:relative;display:flex;gap:0;border-radius:99px;padding:5px;margin-bottom:16px;width:fit-content}
+.tabs button{position:relative;z-index:1;border:0;background:none!important;box-shadow:none!important;padding:9px 24px;border-radius:99px;font-weight:600;color:var(--mu);transition:color .3s}
+.pill{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:99px;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.22);box-shadow:var(--hl),0 4px 14px rgba(0,0,0,.45);transition:transform .45s cubic-bezier(.34,1.35,.5,1),width .45s cubic-bezier(.34,1.35,.5,1);pointer-events:none}
+.tabs.dn .pill{filter:brightness(1.25)}
+.tabview{animation:tv .35s ease}@keyframes tv{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tabs button.on{color:#fff}
+.card{border-radius:var(--r);padding:16px;margin-bottom:16px}
+button{font:inherit;cursor:pointer;border-radius:99px;border:1px solid var(--bd);background:var(--soft);color:var(--tx);padding:9px 16px;box-shadow:var(--hl);transition:background .2s,transform .15s}
+button:hover{background:rgba(255,255,255,.15)}button:active{transform:scale(.97)}
+button.pri,button.gold{background:linear-gradient(180deg,#3f7ae0,#1f4bb0);color:#fff;border-color:rgba(255,255,255,.22);font-weight:600;box-shadow:var(--hl),0 6px 18px rgba(0,0,0,.5)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.bar input,.bar select{flex:1;min-width:130px}
+input,select,textarea{width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:14px;background:rgba(0,0,0,.45);color:var(--tx);font:inherit;box-shadow:inset 0 1px 3px rgba(0,0,0,.25)}
+select option{background:#0b0f18;color:#eaf2ff}
+input::placeholder,textarea::placeholder{color:rgba(157,178,212,.6)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(110,145,200,.7);outline-offset:0}
+textarea{min-height:76px;resize:vertical}
+label{display:block;font-size:13px;color:var(--mu);margin-bottom:4px;font-weight:500}
+.tw{overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px;table-layout:auto}
+td{overflow-wrap:anywhere}
+.wrap,.hdi,.card,.stats,.st,.tw,.md{min-width:0;max-width:100%}
+input,select,textarea{font-size:16px;max-width:100%;min-width:0}
+.tw{overflow-x:hidden}
+th{text-align:right;color:var(--mu);font-weight:600;font-size:12px;padding:8px;border-bottom:1px solid var(--bd);white-space:nowrap}
+td{padding:12px 8px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+tr.hot td{background:rgba(255,26,46,.09)}tr.hot td:first-child{box-shadow:inset -3px 0 0 #ff1a2e}
+.ck{width:28px;height:28px;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.05);position:relative;transition:all .25s}
+.ck:hover{border-color:#2eea7d}
+.ck.on{background:linear-gradient(180deg,#2eea7d,#0fb55a);border-color:#2eea7d;box-shadow:0 0 14px rgba(46,234,125,.6)}
+.ck.on::after{content:"";position:absolute;left:9px;top:4px;width:6px;height:12px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+tr.done td{opacity:.45}tr.done td:first-child{opacity:1}tr.done .t{text-decoration:line-through}
+.u{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:12px;font-weight:800;color:#fff;box-shadow:var(--hl),0 4px 12px rgba(0,0,0,.3)}
+.t{font-weight:600}.cl{font-size:12px;color:var(--mu)}
+.n{color:var(--mu);font-size:13px;white-space:pre-wrap;max-width:200px}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;background:rgba(61,155,255,.18);border:1px solid rgba(94,176,255,.45);font-size:12px;color:#a8d4ff}
+.act{display:flex;gap:6px;flex-wrap:wrap;min-width:0;max-width:190px}
+.act button{padding:5px 12px;font-size:12.5px}
+.act .wa{background:linear-gradient(180deg,#2eea7d,#0fb55a);border-color:rgba(255,255,255,.3);color:#fff;font-weight:700}
+a{color:#7db8ff}
+.late{color:#ff3b47;font-weight:700}
+.empty{text-align:center;color:var(--mu);padding:28px}
+.cnt{color:var(--mu);font-size:13px;margin-bottom:6px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.65);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.ov.on{display:flex}
+.md{border-radius:28px;width:100%;max-width:560px;max-height:92vh;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding:22px;background:rgba(12,16,26,.78)}
+.md h2{margin:0 0 14px;font-size:18px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:12px;min-width:0}
+.g2>div{min-width:0}
+body:has(.ov.on){overflow:hidden}
+input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;min-height:46px;text-align:right;color:var(--tx)}
+input[type=date]::-webkit-date-and-time-value,input[type=time]::-webkit-date-and-time-value{text-align:right;min-height:1.2em}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.7}
+input,select,textarea,label{font-family:inherit;font-size:16px;line-height:1.4}
+::placeholder{font-size:16px;font-family:inherit}
+label{font-size:16px!important}
+.full{grid-column:1/-1}
+.rng{display:flex;align-items:center;gap:10px}.rng input{flex:1;width:auto;min-width:0;padding:0;box-shadow:none;background:none;border:0;accent-color:#5b7fb5}
+.rngv{min-width:36px;text-align:center;font-weight:800;font-size:20px}
+.mf{display:flex;gap:10px;margin-top:16px}
+.mn{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.mn h2{margin:0;font-size:19px;flex:1;text-align:center}
+.prog{height:10px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.prog i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2352b8,#5eb0ff)}
+.ch{display:flex;align-items:flex-end;gap:10px;height:130px;margin-top:8px}
+.ch>div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;cursor:pointer}
+.bw{display:flex;align-items:flex-end;gap:3px;height:100px}
+.bw i{width:14px;border-radius:6px 6px 0 0;background:rgba(255,255,255,.18)}.bw i.d{background:linear-gradient(180deg,#7cc0ff,#2a62d4)}
+.ch span{font-size:11px;color:var(--mu);margin-top:4px}.ch>div.cur span{color:#fff;font-weight:700}
+.cb{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.cb button.on{background:linear-gradient(180deg,#3f7ae0,#1f4bb0);border-color:rgba(255,255,255,.3);color:#fff;font-weight:700}
+.cat{display:inline-block;font-size:11px;padding:1px 9px;border-radius:99px;font-weight:700;margin-inline-end:6px}
+.cat.w{background:rgba(94,176,255,.18);color:#8cc8ff;border:1px solid rgba(94,176,255,.45)}
+.cat.h{background:rgba(197,139,255,.18);color:#d6aaff;border:1px solid rgba(197,139,255,.45)}
+.dng{border-color:rgba(255,59,71,.6);color:#ff6b74;background:rgba(255,26,46,.1)}
+.dng.on{background:linear-gradient(180deg,#ff3b47,#d1101f);color:#fff;border-color:rgba(255,255,255,.3);font-weight:700}
+h3{margin:0 0 10px;font-size:15px}
+@media(max-width:1000px){
+table,tbody{display:block;width:100%}
+thead{display:none}
+tr{display:grid;grid-template-columns:auto auto minmax(0,1fr);column-gap:12px;min-width:0;align-items:center;margin-bottom:12px;padding:12px 14px;border:1px solid var(--bd);border-radius:18px;background:rgba(255,255,255,.05)}
+#mr tr{grid-template-columns:auto minmax(0,1fr)}
+td{display:block;border:0!important;padding:3px 0!important;grid-column:1/-1;min-width:0;width:auto!important;opacity:1}
+td:empty{display:none}
+#rows td:nth-child(-n+3),#mr td:nth-child(-n+2){grid-column:auto}
+td.empty{grid-column:1/-1!important;display:block}
+#rows td:nth-child(4)::before{content:"יעד: "}
+#rows td:nth-child(5)::before{content:"טלפון: "}
+#rows td:nth-child(6)::before{content:"ת״ז: "}
+#rows td:nth-child(7)::before{content:"חברה: "}
+#rows td:nth-child(8)::before{content:"הערות: "}
+#mr td:nth-child(3)::before{content:"יעד: "}
+#mr td:nth-child(4)::before{content:"חברה: "}
+#mr td:nth-child(5)::before{content:"סטטוס: "}
+#mr td:nth-child(6)::before{content:"הערות: "}
+#rows td:nth-child(n+4)::before,#mr td:nth-child(n+3)::before{color:var(--mu);font-size:inherit}
+td,.cl,.n,.chip{font-size:15px}
+.n{max-width:none}
+.act{max-width:none;min-width:0}
+#rows td:nth-child(9){margin-top:6px;padding-top:10px!important;border-top:1px solid var(--bd)!important}
+tr.hot{background:rgba(255,26,46,.1);border-color:rgba(255,26,46,.55)}
+tr.hot td,tr.hot td:first-child{background:none!important;box-shadow:none!important}
+tr.done td{opacity:.5}tr.done td:first-child{opacity:1}
+}
+</style>
+</head>
+<body>
+<div class="hd"><div class="hdi">
+<div class="logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9db8dc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+<div><h1>ניהול סדר יום – סוכן ביטוח</h1><p>משימות, תזכורות ומעקב חודשי במקום אחד</p></div>
+<div class="sp"></div>
+<button class="gold" id="add">+ משימה חדשה</button>
+</div></div>
+
+<div class="wrap">
+<div class="stats" id="stats"></div>
+<div class="tabs" id="tabs"><span class="pill" id="pill"></span><button class="on" data-tab="list">משימות</button><button data-tab="month">מעקב חודשי</button></div>
+
+<div class="cb"><button data-a="cat" data-id="">הכל</button><button data-a="cat" data-id="עבודה">עבודה</button><button data-a="cat" data-id="בית">בית</button></div>
+<div id="v-list">
+<div class="card">
+<div class="bar"><input id="q" placeholder="חיפוש לפי שם, טלפון, ת״ז, חברה…"><select id="fs"><option value="open">פתוחות</option><option value="all">הכול</option><option value="done">טופלו</option></select><select id="fc"><option value="">כל החברות</option></select></div>
+<div class="cnt" id="cnt"></div>
+<div class="tw"><table><thead><tr><th></th><th>דחיפות</th><th>משימה</th><th>יעד</th><th>טלפון</th><th>ת״ז</th><th>חברה</th><th>הערות</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+</div>
+</div>
+
+<div id="v-month" style="display:none">
+<div class="card">
+<div class="mn"><button id="pm">→</button><h2 id="mt"></h2><button id="nm">←</button></div>
+<div class="stats" id="ms" style="margin-bottom:12px"></div>
+<div class="prog"><i id="pb" style="width:0"></i></div>
+<h3 style="margin-top:18px">6 חודשים אחרונים</h3>
+<div class="ch" id="ch"></div>
+</div>
+<div class="card"><h3>משימות החודש</h3><div class="tw"><table><thead><tr><th>דחיפות</th><th>משימה</th><th>יעד</th><th>חברה</th><th>סטטוס</th><th>הערות</th></tr></thead><tbody id="mr"></tbody></table></div></div>
+</div>
+</div>
+
+<div class="wrap" style="margin-top:-24px;text-align:center"><button class="dng" id="wipe">נקה את כל הנתונים</button></div>
+<div class="ov" id="ovc"><div class="md" style="max-width:380px;text-align:center"><h2 id="ct">בטוח?</h2><p id="cm" style="color:var(--mu);margin:0 0 4px"></p><div class="mf" style="justify-content:center"><button class="dng on" id="cy">כן</button><button id="cn">ביטול</button></div></div></div>
+<div class="ov" id="ovf"><div class="md">
+<h2 id="mh">משימה חדשה</h2>
+<div class="g2">
+<div class="full"><label>משימה *</label><input id="title" placeholder="למשל: מינוי סוכן ללקוח לפני טיסה"></div>
+<div class="full"><label>דחיפות (1–10)</label><div class="rng"><input type="range" id="urg" min="1" max="10" value="5"><span class="rngv" id="urgv">5</span></div></div>
+<div class="full"><label>קטגוריה</label><select id="cat"><option>עבודה</option><option>בית</option></select></div>
+<div><label>תאריך יעד</label><input type="date" id="due"></div>
+<div><label>שעה (אופציונלי)</label><input type="time" id="time"></div>
+<div><label>שם לקוח</label><input id="cname"></div>
+<div><label>טלפון</label><input id="phone" type="tel" inputmode="tel" placeholder="050-0000000"></div>
+<div><label>ת״ז</label><input id="idn" inputmode="numeric" maxlength="9" placeholder="9 ספרות"></div>
+<div><label>חברת ביטוח</label><input id="comp" list="comps" placeholder="בחר או הקלד"><datalist id="comps"><option>הראל</option><option>מגדל</option><option>הפניקס</option><option>כלל</option><option>מנורה מבטחים</option><option>הכשרה</option><option>איילון</option><option>שירביט</option><option>AIG</option><option>ביטוח ישיר</option><option>ליברה</option></datalist></div>
+<div class="full"><label>הערות</label><textarea id="notes"></textarea></div>
+</div>
+<div class="mf"><button class="pri" id="save">שמור</button><button id="cx">ביטול</button></div>
+</div></div>
+
+<div class="ov" id="ovw"><div class="md">
+<h2>שליחת הודעה בוואטסאפ</h2>
+<div class="g2"><div class="full"><label>תבנית</label><select id="tp"><option value="0">מינוי סוכן לפני טיסה</option><option value="1">חידוש פוליסה</option><option value="2">בקשת מסמכים</option><option value="3">הודעה חופשית</option></select></div>
+<div class="full"><label>נוסח ההודעה</label><textarea id="wm" style="min-height:130px"></textarea></div></div>
+<div class="mf"><button class="pri" style="background:var(--wa);border-color:var(--wa);color:#fff" id="wgo">פתח בוואטסאפ</button><button id="wcx">סגור</button></div>
+</div></div>
+
+<script>
+var KEY="agent_tasks_v1",tasks=[],fcat="",editId=null,waId=null,mo=new Date().toISOString().slice(0,7);
+var $=function(i){return document.getElementById(i)};
+function load(){try{tasks=JSON.parse(localStorage.getItem(KEY)||"[]")||[]}catch(e){tasks=[]}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(e){}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function col(n){return n>=9?"#ff1a2e":n>=7?"#ff7a00":n>=5?"#ffc400":n>=3?"#00d46a":"#3d9bff"}
+function tc(n){return n>=5&&n<7?"#2a1c00":"#fff"}
+function today(){return new Date().toISOString().slice(0,10)}
+function fmt(d){if(!d)return"";var p=d.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+function mkey(t){return(t.due||t.created||today()).slice(0,7)}
+function mname(k){var p=k.split("-");return new Date(+p[0],+p[1]-1,1).toLocaleDateString("he-IL",{month:"long",year:"numeric"})}
+function waNum(p){var d=String(p||"").replace(/\D/g,"");if(d.indexOf("972")===0){}else if(d.charAt(0)==="0")d="972"+d.slice(1);else return null;return d.length>=11&&d.length<=12?d:null}
+function gcal(t){
+var d=t.due.replace(/-/g,""),dates;
+if(t.time){var s=d+"T"+t.time.replace(":","")+"00",h=new Date(t.due+"T"+t.time),e=new Date(h.getTime()+36e5);
+var pad=function(n){return(n<10?"0":"")+n};
+dates=s+"/"+e.getFullYear()+pad(e.getMonth()+1)+pad(e.getDate())+"T"+pad(e.getHours())+pad(e.getMinutes())+"00"}
+else{var n=new Date(t.due+"T00:00:00");n.setDate(n.getDate()+1);var pd=function(x){return(x<10?"0":"")+x};dates=d+"/"+n.getFullYear()+pd(n.getMonth()+1)+pd(n.getDate())}
+var det=["קטגוריה: "+(t.cat||"עבודה"),t.cname&&"לקוח: "+t.cname,t.phone&&"טלפון: "+t.phone,t.idn&&"ת״ז: "+t.idn,t.comp&&"חברה: "+t.comp,t.notes&&"הערות: "+t.notes,"דחיפות: "+t.urg+"/10"].filter(Boolean).join("\n");
+return"https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(t.title)+"&dates="+dates+"&details="+encodeURIComponent(det)}
+var TP=[function(n){return"שלום"+(n?" "+n:"")+", כאן [שמך], סוכן הביטוח שלך. לקראת הטיסה שלך אני צריך לבצע איתך מינוי סוכן קצר באמצעות קוד שיגיע ב-SMS. מתי נוח לך שאתקשר?"},
+function(n){return"שלום"+(n?" "+n:"")+", כאן [שמך], סוכן הביטוח שלך. הפוליסה שלך מתקרבת לחידוש ואשמח לעבור איתה יחד כדי לוודא שאתה מקבל את התנאים הטובים ביותר. מתי נוח לדבר?"},
+function(n){return"שלום"+(n?" "+n:"")+", כאן [שמך], סוכן הביטוח שלך. כדי להשלים את הטיפול אשמח שתשלח לי את המסמכים הבאים: [פרט]. תודה רבה!"},
+function(n){return"שלום"+(n?" "+n:"")+", "}];
+function inCat(t){return!fcat||(t.cat||"עבודה")===fcat}
+function catB(t){var c=t.cat||"עבודה";return'<span class="cat '+(c==="בית"?"h":"w")+'">'+c+'</span>'}
+function getT(id){return tasks.filter(function(t){return t.id===id})[0]}
+function openForm(id){
+var x=id?getT(id):null;editId=id||null;
+$("mh").textContent=x?"עריכת משימה":"משימה חדשה";
+var f={title:"",cat:"עבודה",urg:5,due:"",time:"",cname:"",phone:"",idn:"",comp:"",notes:""};
+Object.keys(f).forEach(function(k){$(k).value=x&&x[k]!=null?x[k]:f[k]});
+$("urgv").textContent=$("urg").value;$("ovf").classList.add("on");$("title").focus()}
+$("urg").oninput=function(){$("urgv").textContent=this.value};
+$("add").onclick=function(){openForm()};
+$("cx").onclick=function(){$("ovf").classList.remove("on")};
+$("save").onclick=function(){
+var t=$("title").value.trim();if(!t){$("title").focus();return}
+var o={title:t,cat:$("cat").value,urg:+$("urg").value,due:$("due").value,time:$("time").value,cname:$("cname").value.trim(),phone:$("phone").value.trim(),idn:$("idn").value.trim(),comp:$("comp").value.trim(),notes:$("notes").value.trim()};
+if(editId){tasks=tasks.map(function(x){return x.id===editId?Object.assign({},x,o):x})}
+else{o.id=Date.now()+Math.random().toString(36).slice(2,6);o.done=false;o.created=today();tasks.push(o)}
+persist();$("ovf").classList.remove("on");render()};
+function openWa(id){var t=getT(id);if(!t||!waNum(t.phone))return;waId=id;$("tp").value="0";$("wm").value=TP[0](t.cname);$("ovw").classList.add("on")}
+$("tp").onchange=function(){var t=getT(waId);$("wm").value=TP[+this.value](t&&t.cname)};
+$("wcx").onclick=function(){$("ovw").classList.remove("on")};
+$("wgo").onclick=function(){var t=getT(waId),n=t&&waNum(t.phone);if(!n)return;window.open("https://wa.me/"+n+"?text="+encodeURIComponent($("wm").value),"_blank","noopener");$("ovw").classList.remove("on")};
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tabs button").forEach(function(x){x.classList.toggle("on",x===b)});$("v-list").style.display=b.dataset.tab==="list"?"":"none";$("v-month").style.display=b.dataset.tab==="month"?"":"none";var v=$(b.dataset.tab==="list"?"v-list":"v-month");v.classList.remove("tabview");void v.offsetWidth;v.classList.add("tabview");movePill(b)}});
+function movePill(b){var p=$("pill");p.style.width=b.offsetWidth+"px";p.style.transform="translateX("+b.offsetLeft+"px)"}
+function curTab(){return document.querySelector(".tabs button.on")}
+$("tabs").addEventListener("pointerdown",function(){this.classList.add("dn")});
+document.addEventListener("pointerup",function(){$("tabs").classList.remove("dn")});
+window.addEventListener("resize",function(){movePill(curTab())});
+window.addEventListener("load",function(){movePill(curTab())});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){movePill(curTab())});
+movePill(curTab());
+$("pm").onclick=function(){shift(-1)};$("nm").onclick=function(){shift(1)};
+function shift(d){var p=mo.split("-"),n=new Date(+p[0],+p[1]-1+d,1);mo=n.getFullYear()+"-"+("0"+(n.getMonth()+1)).slice(-2);render()}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var id=b.dataset.id,a=b.dataset.a;
+if(a==="tog"){tasks=tasks.map(function(x){if(x.id===id){x.done=!x.done;x.doneAt=x.done?today():null}return x});persist();render()}
+else if(a==="edit")openForm(id);
+else if(a==="del"){ask("למחוק את המשימה הזו?","כן, מחק",function(){tasks=tasks.filter(function(x){return x.id!==id});persist();render()})}
+else if(a==="wa")openWa(id);
+else if(a==="cal"){var t=getT(id);if(t&&t.due)window.open(gcal(t),"_blank","noopener")}
+else if(a==="mo"){mo=id;render()}
+else if(a==="cat"){fcat=id;render()}});
+["q","fs","fc"].forEach(function(i){$(i).oninput=render});
+function stat(n,l,c){return'<div class="st '+(c||"")+'"><b>'+n+'</b><span>'+l+'</span></div>'}
+function render(){
+var td=today(),open=tasks.filter(function(t){return!t.done&&inCat(t)});
+document.querySelectorAll(".cb button").forEach(function(b){b.classList.toggle("on",b.dataset.id===fcat)});
+$("stats").innerHTML=stat(open.length,"משימות פתוחות")+stat(open.filter(function(t){return t.urg>=8}).length,"דחופות (8–10)","r")+stat(open.filter(function(t){return t.due===td}).length,"ליום היום","g")+stat(open.filter(function(t){return t.due&&t.due<td}).length,"באיחור","r");
+var cs=Array.from(new Set(tasks.map(function(t){return t.comp}).filter(Boolean))),cur=$("fc").value;
+$("fc").innerHTML='<option value="">כל החברות</option>'+cs.map(function(c){return'<option'+(c===cur?" selected":"")+'>'+esc(c)+'</option>'}).join("");
+var q=$("q").value.trim().toLowerCase(),fs=$("fs").value,fc=$("fc").value;
+var l=tasks.filter(function(t){if(!inCat(t))return false;if(fs==="open"&&t.done)return false;if(fs==="done"&&!t.done)return false;if(fc&&t.comp!==fc)return false;return!q||[t.title,t.cname,t.phone,t.idn,t.comp,t.notes].join(" ").toLowerCase().indexOf(q)>-1});
+l.sort(function(a,b){return(a.done-b.done)||(b.urg-a.urg)||((a.due||"9")>(b.due||"9")?1:-1)});
+$("cnt").textContent=l.length+" משימות מוצגות";
+$("rows").innerHTML=l.length?l.map(function(t){
+var late=t.due&&!t.done&&t.due<td,hasWa=!!waNum(t.phone);
+return'<tr class="'+(t.done?"done":(t.urg>=9?"hot":""))+'"><td style="width:44px"><button class="ck'+(t.done?" on":"")+'" data-a="tog" data-id="'+t.id+'" title="'+(t.done?"בטל סימון":"סמן כטופלה")+'" aria-label="סמן כטופלה"></button></td><td><span class="u" style="background:'+col(t.urg)+';color:'+tc(t.urg)+';box-shadow:var(--hl),0 0 18px '+col(t.urg)+'aa">'+t.urg+'</span></td>'+
+'<td>'+catB(t)+'<div class="t" style="margin-top:3px">'+esc(t.title)+'</div>'+(t.cname?'<div class="cl">'+esc(t.cname)+'</div>':"")+'</td>'+
+'<td class="'+(late?"late":"")+'">'+fmt(t.due)+(t.time?'<div class="cl">'+esc(t.time)+'</div>':"")+'</td>'+
+'<td>'+(t.phone?'<a href="tel:'+esc(t.phone.replace(/[^0-9+]/g,""))+'">'+esc(t.phone)+'</a>':"")+'</td>'+
+'<td>'+esc(t.idn)+'</td><td>'+(t.comp?'<span class="chip">'+esc(t.comp)+'</span>':"")+'</td><td class="n">'+esc(t.notes)+'</td>'+
+'<td><div class="act">'+(hasWa?'<button class="wa" data-a="wa" data-id="'+t.id+'">וואטסאפ</button>':"")+(t.due?'<button data-a="cal" data-id="'+t.id+'">ליומן</button>':"")+
+'<button data-a="edit" data-id="'+t.id+'">ערוך</button><button data-a="del" data-id="'+t.id+'">מחק</button></div></td></tr>'}).join(""):
+'<tr><td colspan="9" class="empty">אין משימות להצגה</td></tr>';
+var mt=tasks.filter(function(t){return inCat(t)&&mkey(t)===mo}),md=mt.filter(function(t){return t.done}).length,pc=mt.length?Math.round(md/mt.length*100):0;
+$("mt").textContent=mname(mo);
+$("ms").innerHTML=stat(mt.length,"סה״כ משימות")+stat(md,"טופלו","g")+stat(mt.length-md,"נותרו")+stat(pc+"%","אחוז השלמה");
+$("pb").style.width=pc+"%";
+var ks=[],p=mo.split("-");for(var i=5;i>=0;i--){var d=new Date(+p[0],+p[1]-1-i,1);ks.push(d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2))}
+var mx=Math.max(1,Math.max.apply(null,ks.map(function(k){return tasks.filter(function(t){return inCat(t)&&mkey(t)===k}).length})));
+$("ch").innerHTML=ks.map(function(k){var a=tasks.filter(function(t){return inCat(t)&&mkey(t)===k}),dn=a.filter(function(t){return t.done}).length;
+return'<div data-a="mo" data-id="'+k+'" class="'+(k===mo?"cur":"")+'"><div class="bw"><i style="height:'+Math.round(a.length/mx*100)+'%" title="סה״כ"></i><i class="d" style="height:'+Math.round(dn/mx*100)+'%" title="הושלמו"></i></div><span>'+k.slice(5)+'/'+k.slice(2,4)+'</span></div>'}).join("");
+mt.sort(function(a,b){return(b.urg-a.urg)});
+$("mr").innerHTML=mt.length?mt.map(function(t){return'<tr class="'+(t.done?"done":(t.urg>=9?"hot":""))+'"><td style="width:44px"><button class="ck'+(t.done?" on":"")+'" data-a="tog" data-id="'+t.id+'" title="'+(t.done?"בטל סימון":"סמן כטופלה")+'" aria-label="סמן כטופלה"></button></td><td><span class="u" style="background:'+col(t.urg)+';color:'+tc(t.urg)+';box-shadow:var(--hl),0 0 18px '+col(t.urg)+'aa">'+t.urg+'</span></td><td><div class="t">'+esc(t.title)+'</div>'+catB(t)+'</td><td>'+fmt(t.due)+'</td><td>'+esc(t.comp)+'</td><td>'+(t.done?"טופלה"+(t.doneAt?" · "+fmt(t.doneAt):""):"פתוח")+'</td><td class="n">'+esc(t.notes)+'</td></tr>'}).join(""):'<tr><td colspan="6" class="empty">אין משימות בחודש זה</td></tr>'}
+var cbk=null;
+function ask(msg,yes,cb){$("cm").textContent=msg;$("cy").textContent=yes;cbk=cb;$("ovc").classList.add("on")}
+$("cn").onclick=function(){$("ovc").classList.remove("on");cbk=null};
+$("cy").onclick=function(){$("ovc").classList.remove("on");var c=cbk;cbk=null;if(c)c()};
+$("wipe").onclick=function(){ask("בטוח שברצונך למחוק את כל המשימות והנתונים? הפעולה אינה ניתנת לשחזור.","כן, מחק הכול",function(){tasks=[];fcat="";try{localStorage.removeItem(KEY)}catch(e){}persist();render()})};
+load();render();
+</script>
+</body>
+</html>
